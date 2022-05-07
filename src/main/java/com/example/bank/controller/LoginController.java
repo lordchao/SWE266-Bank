@@ -19,7 +19,7 @@ public class LoginController {
     @RequestMapping("/login")
     public String login(String username, String password) {
         System.out.println(username + password);
-        Map<String, Object> resultMap = jdbcTemplate.queryForMap("select password from user where username='" + username+"'");
+        Map<String, Object> resultMap = jdbcTemplate.queryForMap("select * from user");
         System.out.println(resultMap.get("password"));
         return "login";
     }
