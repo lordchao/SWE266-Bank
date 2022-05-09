@@ -23,7 +23,7 @@ public class DepositServiceImpl implements DepositServiceI {
         System.out.println(resultMap.get("deposit"));
         id = (Integer) resultMap.get("id");
 
-//        Integer deposit = Integer.valueOf(String.valueOf(jdbcTemplate.queryForMap("select deposit from user where id=?;", id)));
+//        Integer deposit = Integer.valueOf(String.valueOf(jdbcTemplate.queryForMap("select deposit from user where id=?", id)));
 //        Integer money_d = Integer.valueOf((String) resultMap.get("deposit"));
 //        jdbcTemplate.update("update user set balance=? where id=?", money_d, id);
         return true;
