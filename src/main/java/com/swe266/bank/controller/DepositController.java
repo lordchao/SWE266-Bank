@@ -1,4 +1,4 @@
-package com.example.bank.controller;
+package com.swe266.bank.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;

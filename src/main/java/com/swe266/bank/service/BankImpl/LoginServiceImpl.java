@@ -1,6 +1,6 @@
-package com.example.bank.service.BankImpl;
+package com.swe266.bank.service.BankImpl;
 
-import com.example.bank.service.BankI.LoginServiceI;
+import com.swe266.bank.service.BankI.LoginServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;

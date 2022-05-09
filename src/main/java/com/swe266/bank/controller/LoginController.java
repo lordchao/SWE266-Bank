@@ -1,6 +1,6 @@
-package com.example.bank.controller;
+package com.swe266.bank.controller;
 
-import com.example.bank.service.BankI.LoginServiceI;
+import com.swe266.bank.service.BankI.LoginServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
