@@ -12,13 +12,13 @@ public class DepositController {
 
 
     @RequestMapping("/deposit")
-    public boolean deposit(String username, double money) {
+    public boolean deposit(Integer id, double money) {
         if(money<0){
             System.out.println("Please enter the valid money");
             return false;
         }
-        Double deposit = Double.valueOf(String.valueOf(jdbcTemplate.queryForMap("select balance from deposit where username=?", username)));
-        jdbcTemplate.update("update deposit set balance=? where username=?", money+deposit, username);
+        Double deposit = Double.valueOf(String.valueOf(jdbcTemplate.queryForMap("select balance from user where id=?", id)));
+        jdbcTemplate.update("update user set balance=? where id=?", money+deposit, id);
         return true;
     }
 }
