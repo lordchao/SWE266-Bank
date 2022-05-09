@@ -12,7 +12,12 @@
             username: <input id="username" type="text" name="username" required autofocus/> <br>
             amount: <input id="amount" type="text" name="amount" required autofocus/><br>
         </form>
-        <button>confirm</button>
+        <button onclick="popup()">confirm</button>
+        <script type="text/javascript">
+            function popup(){
+                alert("点击[确定]以继续操作");
+            }
+        </script>
     </div>
     <div id="deposit" style="width:300px">
         Deposit
