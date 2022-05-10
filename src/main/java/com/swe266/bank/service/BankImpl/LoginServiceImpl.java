@@ -18,8 +18,12 @@ public class LoginServiceImpl implements LoginServiceI {
     private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
     public boolean login(String username, String password) {
-        Map<String, Object> resultMap = jdbcTemplate.queryForMap("select password from user where username= '"+username+"'");
-        logger.info("select password from user where username='"+username+"'" + " executed successfully");
-        return resultMap.get("password").equals(password);
+        try {
+            Map<String, Object> resultMap = jdbcTemplate.queryForMap("select password from user where username= '"+username+"'");
+            logger.info("select password from user where username='"+username+"'" + " executed successfully");
+            return resultMap.get("password").equals(password);
+        }catch (EmptyResultDataAccessException e) {
+            return false;
+        }
     }
 }

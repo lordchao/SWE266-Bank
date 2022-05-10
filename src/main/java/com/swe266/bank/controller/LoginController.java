@@ -24,4 +24,8 @@ public class LoginController {
             return "error";
         }
     }
+    @RequestMapping("/jumpLogin")
+    public String jumpMain() {
+        return "index";
+    }
 }
