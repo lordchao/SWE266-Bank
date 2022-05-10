@@ -1,7 +1,9 @@
 # SWE266-Bank
 # Introduction
 This is the system project for build phase assignment for MSWE 266P.
+
 Group 7
+
 Group Member: Xin Tan, Shuaihua Niu, Jiahan Tu, Chao Liu.
 
 # Project Architecture
