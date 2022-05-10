@@ -12,21 +12,30 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+import java.util.Map;
+
+@Service("TransferService")
 public class TransferServiceImpl implements TransferServiceI {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
     @Override
-    public boolean transfer(String username, String amount, String thisUsername) {
-        logger.info("into transfer function");
-        String sql = "SELECT deposit FROM user WHERE id = '"+username+"'";
-        int myDeposit = jdbcTemplate.queryForObject(sql, Integer.class, thisUsername) - Integer.parseInt(amount);
-        int currentDeposit = jdbcTemplate.queryForObject(sql, Integer.class, username);
-        int newDeposit = Integer.parseInt(amount)+currentDeposit;
-        String sql2 = "update user set deposit =" + myDeposit + "where id ='"+thisUsername+"'";
-        String sql3 = "update user set deposit =" + newDeposit + "where id ='"+username+"'";
-        jdbcTemplate.execute(sql2);
-        jdbcTemplate.execute(sql3);
+    public boolean transfer(String username, String transfer_amount, String thisUsername) {
+        logger.info(username,thisUsername,transfer_amount);
+        logger.info("select deposit from user where username='"+username+"'");
+        int money = Integer.parseInt(transfer_amount);
+        Map<String, Object> resultMap = jdbcTemplate.queryForMap("select deposit from user where username='"+username+"'");
+
+        int toBalance = (int) resultMap.get("deposit") + money;
+        Map<String, Object> resultMap1 = jdbcTemplate.queryForMap("select deposit from user where username='"+thisUsername+"'");
+        int myBalance = (int) resultMap1.get("deposit") - money;
+        if (myBalance<0){
+            System.out.println("Not enough money to transfer!");
+            return false;
+        }
+        jdbcTemplate.update("update user set deposit=? where username=?", toBalance, username);
+        jdbcTemplate.update("update user set deposit=? where username=?", myBalance, thisUsername);
         return true;
     }
 }
