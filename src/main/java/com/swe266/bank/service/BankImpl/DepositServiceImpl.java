@@ -37,6 +37,7 @@ public class DepositServiceImpl implements DepositServiceI {
         sql = "update user set deposit="+deposit+" where username='"+username+"'";
         logger.info(sql);
         jdbcTemplate.update(sql);
+//        test
         return true;
     }
 }
