@@ -12,6 +12,7 @@ import java.util.Map;
 @Controller
 public class DepositController {
     @Autowired
+
     private DepositServiceI depositServiceI;
 
     @RequestMapping(value = "/deposit")
@@ -19,5 +20,6 @@ public class DepositController {
         boolean depositStatus = depositServiceI.deposit(id, deposit_amount);
         if (depositStatus) return "main";
         else return "error";
+
     }
 }
