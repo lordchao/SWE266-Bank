@@ -14,9 +14,9 @@ public class DepositController {
     @Autowired
     private DepositServiceI depositServiceI;
 
-    @RequestMapping(value = "/deposit", method = RequestMethod.POST)
-    public String deposit(Integer id, String money) {
-        boolean depositStatus = depositServiceI.deposit(id, money);
+    @RequestMapping(value = "/deposit")
+    public String deposit(Integer id, String deposit_amount) {
+        boolean depositStatus = depositServiceI.deposit(id, deposit_amount);
         if (depositStatus) return "main";
         else return "error";
     }

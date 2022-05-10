@@ -15,21 +15,18 @@ public class DepositServiceImpl implements DepositServiceI {
     JdbcTemplate jdbcTemplate;
 
     public boolean deposit(Integer id, String money) {
-//        if(money<0){
-//            System.out.println("Please enter the valid money");
-//            return false;
-//        }
+
         Map<String, Object> resultMap = jdbcTemplate.queryForMap("select * from user");
         System.out.println(resultMap.get("deposit"));
         id = (Integer) resultMap.get("id");
         Integer balance = (Integer) resultMap.get("deposit");
-        Integer new_deposit = 100;
-        System.out.println(balance + new_deposit);
+        Integer new_deposit = Integer.valueOf(money);
+        if(new_deposit<0){
+            System.out.println("Please enter the valid money");
+            return false;
+        }
 
-
-//        Integer deposit = Integer.valueOf(String.valueOf(jdbcTemplate.queryForMap("select deposit from user where id=?", id)));
-//        Integer money_d = Integer.valueOf((String) resultMap.get("deposit"));
-        jdbcTemplate.update("update user set balance=? where id=?", balance+new_deposit, id);
+        jdbcTemplate.update("update user set deposit=? where id=?", balance+new_deposit, id);
         return true;
     }
 }
