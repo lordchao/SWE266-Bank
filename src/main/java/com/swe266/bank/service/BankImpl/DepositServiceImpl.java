@@ -39,4 +39,9 @@ public class DepositServiceImpl implements DepositServiceI {
         jdbcTemplate.update(sql);
         return true;
     }
+
+    public String checkBalance(String username) {
+        Map<String, Object> resMap = jdbcTemplate.queryForMap("select deposit from user where username='"+username+"'");
+        return resMap.get("deposit").toString();
+    }
 }

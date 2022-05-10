@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Bank of group 13</title>
-    <div id="header" style="width:900px">
+    <div id="header" style="width:1200px">
         <h1>Login successfully</h1>
     </div>
     <div id="transfer" style="width:300px">
@@ -30,6 +30,14 @@
         <form th:action="@{/withdraw}" method="post">
             username: <input id="withdraw username" type="text" name="username" required autofocus/><br>
             amount: <input id="withdraw amount" type="text" name="amount" required autofocus/><br>
+            <button>confirm</button>
+        </form>
+    </div>
+
+    <div id="check balance" style="width:300px">
+        Withdraw
+        <form th:action="@{/check_balance}" method="post">
+            username: <input id="username2" type="text" name="username" required autofocus/><br>
             <button>confirm</button>
         </form>
     </div>

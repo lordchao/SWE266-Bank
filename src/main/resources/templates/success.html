@@ -6,10 +6,6 @@
 </head>
 <body>
 <h1 th:text="${message}"></h1>
-<form th:action="@{/jumpMain}" method="post">
-    <button type="submit" class="btn btn-primary btn-block">
-        return to main page
-    </button>
-</form>
+<a th:href="@{/success}">return to main page</a>
 </body>
 </html>

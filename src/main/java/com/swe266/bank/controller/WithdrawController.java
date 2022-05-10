@@ -13,9 +13,9 @@ public class WithdrawController {
     WithdrawServiceI withdrawServiceI;
 
     @RequestMapping("/withdraw")
-    String withdraw(String username, int amount, Model model) {
+    String withdraw(String username, String amount, Model model) {
         if (withdrawServiceI.Withdraw(username, amount)) {
-            model.addAttribute("message", "withdraw" + amount+ "successfully");
+            model.addAttribute("message", "withdraw " + amount+ " dollar successfully");
             return "success";
         } else {
             model.addAttribute("msg", "withdraw failed please check deposit amount");

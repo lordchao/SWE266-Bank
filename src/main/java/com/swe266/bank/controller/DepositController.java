@@ -17,7 +17,6 @@ public class DepositController {
     private DepositServiceI depositServiceI;
 
     @RequestMapping(value = "/deposit")
-
     public String deposit(String username, String deposit_amount, Model model) {
         boolean depositStatus = depositServiceI.deposit(username, deposit_amount);
         if (depositStatus) {
@@ -28,6 +27,12 @@ public class DepositController {
             model.addAttribute("msg", "please input valid amount");
             return "error";
         }
+    }
 
+    @RequestMapping(value="check_balance")
+    public String checkBalance(String username, Model model) {
+        String balance = depositServiceI.checkBalance(username);
+        model.addAttribute("message", "current balance is: "+balance);
+        return "success";
     }
 }
