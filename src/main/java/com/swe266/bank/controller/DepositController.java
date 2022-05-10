@@ -19,7 +19,7 @@ public class DepositController {
     public String deposit(Integer id, String deposit_amount) {
         boolean depositStatus = depositServiceI.deposit(id, deposit_amount);
         if (depositStatus) return "main";
-        else return "error";
+        else return "money_error";
 
     }
 }
