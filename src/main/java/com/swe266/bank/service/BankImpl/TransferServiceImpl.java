@@ -29,6 +29,9 @@ public class TransferServiceImpl implements TransferServiceI {
 
     @Override
     public boolean transfer(String username, String transfer_amount, String thisUsername) {
+        if (username.equals(thisUsername)) {
+            return false;
+        }
         logger.info(username,thisUsername,transfer_amount);
         logger.info("select deposit from user where username='"+username+"'");
 
