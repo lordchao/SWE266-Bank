@@ -20,7 +20,7 @@ public class RegServiceImpl implements RegServiceI {
 
     @Override
     public boolean register(String username, String password) {
-        if (username == null || username.length() == 0) {
+        if (username == null || username.length() == 0 || password == null || password.length() == 0 || username.length() > 10 || password.length() > 12) {
             logger.info("No input");
             return false;
         }
