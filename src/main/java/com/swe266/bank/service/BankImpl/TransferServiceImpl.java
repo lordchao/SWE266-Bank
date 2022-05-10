@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 
@@ -30,21 +32,26 @@ public class TransferServiceImpl implements TransferServiceI {
         logger.info(username,thisUsername,transfer_amount);
         logger.info("select deposit from user where username='"+username+"'");
 
+        List<Map<String, Object>> userResultMap = jdbcTemplate.queryForList("select username from user ");
+        Set<String> userNames = new HashSet<>();
+        for (Map<String, Object> row: userResultMap)
+            userNames.add(row.get("username").toString());
+        logger.info(userNames.toString());
+        if (!userNames.contains(username)) return false;
+
         if (! p.matcher(transfer_amount).matches()){
             logger.info("Invalid amount!");
             return false;
         }
-        double money = Integer.valueOf(transfer_amount);
+        double money = Integer.parseInt(transfer_amount);
         Map<String, Object> resultMap = jdbcTemplate.queryForMap("select deposit from user where username='"+username+"'");
 
-        double toBalance = (int) resultMap.get("deposit") + money;
+        double toBalance = (double) resultMap.get("deposit") + money;
         Map<String, Object> resultMap1 = jdbcTemplate.queryForMap("select deposit from user where username='"+thisUsername+"'");
-        double myBalance = (int) resultMap1.get("deposit") - money;
+        double myBalance = (double) resultMap1.get("deposit") - money;
 
-        if (myBalance<0){
-            System.out.println("Not enough money to transfer!");
+        if (myBalance<0)
             return false;
-        }
         jdbcTemplate.update("update user set deposit=? where username=?", toBalance, username);
         jdbcTemplate.update("update user set deposit=? where username=?", myBalance, thisUsername);
         return true;

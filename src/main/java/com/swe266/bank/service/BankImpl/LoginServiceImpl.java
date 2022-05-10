@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service("LoginService")
 public class LoginServiceImpl implements LoginServiceI {
@@ -18,12 +21,18 @@ public class LoginServiceImpl implements LoginServiceI {
     private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
     public boolean login(String username, String password) {
-        try {
-            Map<String, Object> resultMap = jdbcTemplate.queryForMap("select password from user where username= '"+username+"'");
-            logger.info("select password from user where username='"+username+"'" + " executed successfully");
-            return resultMap.get("password").equals(password);
-        }catch (EmptyResultDataAccessException e) {
-            return false;
-        }
+        //TODO create a mapping for checking user
+        logger.info("select username from user where username='"+username+"'");
+        List<Map<String, Object>> userResultMap = jdbcTemplate.queryForList("select username from user ");
+        Set<String> userNames = new HashSet<>();
+        for (Map<String, Object> row: userResultMap)
+            userNames.add(row.get("username").toString());
+
+        if (!userNames.contains(username)) return false;
+
+        Map<String, Object> resultMap = jdbcTemplate.queryForMap("select password from user where username= '"+username+"'");
+
+        logger.info("select password from user where username='"+username+"'" + " executed successfully");
+        return resultMap.get("password").equals(password);
     }
 }

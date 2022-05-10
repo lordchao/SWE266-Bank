@@ -4,5 +4,5 @@ import org.springframework.ui.Model;
 
 public interface DepositServiceI {
     boolean deposit(String username, String money);
-
+    String checkBalance(String username);
 }
