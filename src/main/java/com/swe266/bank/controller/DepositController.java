@@ -1,22 +1,25 @@
 package com.swe266.bank.controller;
 
+import com.swe266.bank.service.BankI.DepositServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.Map;
 
+@Controller
 public class DepositController {
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-    @RequestMapping("/deposit")
-    public boolean deposit(String username, double money) {
-        if(money<0){
-            System.out.println("Please enter the valid money");
-            return false;
-        }
-        Double deposit = Double.valueOf(String.valueOf(jdbcTemplate.queryForMap("select balance from deposit where username=?", username)));
-        jdbcTemplate.update("update deposit set balance=? where username=?", money+deposit, username);
-        return true;
+
+    private DepositServiceI depositServiceI;
+
+    @RequestMapping(value = "/deposit")
+    public String deposit(Integer id, String deposit_amount) {
+        boolean depositStatus = depositServiceI.deposit(id, deposit_amount);
+        if (depositStatus) return "main";
+        else return "error";
+
     }
 }
