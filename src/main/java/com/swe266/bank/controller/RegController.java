@@ -14,13 +14,17 @@ public class RegController {
     private RegServiceI RegServiceI;
 
     @RequestMapping("/register")
-    public String register(String username, String password) {
-        boolean regStatus = RegServiceI.register(username, password);
-        return "index";
+    public String register(String username, String password, String balance) {
+        boolean regStatus = RegServiceI.register(username, password, balance);
+        return regStatus ? "regSuccess" : "regFail";
     }
-    @RequestMapping("/jump")
-    public String jump() {
+    @RequestMapping("/jumpReg")
+    public String jumpReg() {
         return "register";
     }
 
+    @RequestMapping("/jumpMain")
+    public String jumpMain() {
+        return "main";
+    }
 }
