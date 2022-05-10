@@ -1,6 +1,8 @@
 package com.swe266.bank.service.BankI;
 
+import org.springframework.ui.Model;
+
 public interface DepositServiceI {
-    public boolean deposit(Integer id, String money);
+    boolean deposit(String username, String money);
 
 }

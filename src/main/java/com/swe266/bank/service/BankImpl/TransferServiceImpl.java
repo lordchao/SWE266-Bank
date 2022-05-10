@@ -16,12 +16,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+
 @Service("TransferService")
 public class TransferServiceImpl implements TransferServiceI {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
+
     private static final Pattern p = Pattern.compile("^(([1-9]{1}\\d*)|(0{1}))(\\.\\d{1,2})?$");
+
     @Override
     public boolean transfer(String username, String transfer_amount, String thisUsername) {
         logger.info(username,thisUsername,transfer_amount);
@@ -37,6 +40,7 @@ public class TransferServiceImpl implements TransferServiceI {
         double toBalance = (int) resultMap.get("deposit") + money;
         Map<String, Object> resultMap1 = jdbcTemplate.queryForMap("select deposit from user where username='"+thisUsername+"'");
         double myBalance = (int) resultMap1.get("deposit") - money;
+
         if (myBalance<0){
             System.out.println("Not enough money to transfer!");
             return false;

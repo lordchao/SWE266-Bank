@@ -12,10 +12,34 @@
     <input id="username" type="text" name="username" required autofocus/><br>
     password:
     <input id="password" type="text" name="password" required autofocus/><br>
-    <button type="submit" class="btn btn-primary btn-block">
-        NEXT
+    initial balance:
+    <input id="balance" type="text" name="balance" required autofocus/><br>
+
+    <button id = "btn" type="submit" class="btn btn-primary btn-block">
+        Next
     </button>
 </form>
+
+
+<script type="text/javascript" th:inline="javascript">
+    function delay(){
+        let status = [[${status}]]
+        console.log(status)
+        if(status === "true"){
+            alert("You have registered successfully")
+           // window.location.href = 'http://localhost:8080'+'/index';
+        }
+        else{
+            alert("This username has been registered before, please use another one!")
+          //  window.location.href = 'http://localhost:8080'+'/register';
+        }
+    }
+
+    function btnClick(){
+
+        setTimeout(delay(),2000)
+    }
+</script>
 
 </body>
 </html>
