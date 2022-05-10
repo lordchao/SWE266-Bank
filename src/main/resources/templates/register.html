@@ -12,10 +12,17 @@
     <input id="username" type="text" name="username" required autofocus/><br>
     password:
     <input id="password" type="text" name="password" required autofocus/><br>
-    <button type="submit" class="btn btn-primary btn-block">
+
+    <button type="submit" class="btn btn-primary btn-block" th:text="${status}" onclick="btnAction()">
         NEXT
     </button>
 </form>
+
+<script>
+    function btnAction(){
+
+    }
+</script>
 
 </body>
 </html>
