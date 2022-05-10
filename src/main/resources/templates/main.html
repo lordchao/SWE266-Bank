@@ -8,11 +8,12 @@
     </div>
     <div id="transfer" style="width:300px">
         Transfer
-        <form>
+        <form th:action="@{/transfer}" method="post">
             username: <input id="username" type="text" name="username" required autofocus/> <br>
+            myusername: <input id="thisUsername" type="text" name="thisUsername" required autofocus/> <br>
             amount: <input id="amount" type="text" name="amount" required autofocus/><br>
+            <button>confirm</button>
         </form>
-        <button onclick="popup()">confirm</button>
         <script type="text/javascript">
             function popup(){
                 alert("点击[确定]以继续操作");

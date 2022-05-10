@@ -9,8 +9,6 @@ import java.util.Map;
 public class DepositController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-
     @RequestMapping("/deposit")
     public boolean deposit(String username, double money) {
         if(money<0){
