@@ -3,6 +3,8 @@ package com.swe266.bank.controller;
 import com.swe266.bank.service.BankI.LoginServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,9 +15,13 @@ public class LoginController {
     private LoginServiceI loginServiceI;
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(String username, String password) {
+    public String login(String username, String password, Model model) {
         boolean loginStatus = loginServiceI.login(username, password);
-        if (loginStatus) return "main";
-        else return "error";
+        if (loginStatus)
+            return "main";
+        else {
+            model.addAttribute("msg", "login failed");
+            return "error";
+        }
     }
 }
