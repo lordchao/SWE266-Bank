@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
+
 @Service("RegService")
 public class RegServiceImpl implements RegServiceI {
     @Autowired
@@ -33,6 +34,7 @@ public class RegServiceImpl implements RegServiceI {
             //logger.info(oneMap.get("username") + " " + oneMap.get("password"));
             if (oneMap.get("username").equals(username)) {
                 logger.info("This username has been registered before, please try another one!");
+
                 return false;
             }
 
@@ -43,6 +45,7 @@ public class RegServiceImpl implements RegServiceI {
         String insertCMD = "insert into user (username, password) values(\"" + username + "\",\"" + password + "\")";
         jdbcTemplate.execute(insertCMD);
         logger.info("Register successfully!");
+
         return true;
     }
 }
