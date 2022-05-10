@@ -14,13 +14,13 @@ public class RegController {
     private RegServiceI RegServiceI;
 
     @RequestMapping("/register")
-    public String register(String username, String password, Model model) {
+    public String register(String username, String password) {
         boolean regStatus = RegServiceI.register(username, password);
-        if (regStatus) {
-            model.addAttribute("status", "true");
-        } else {
-            model.addAttribute("status", "false");
-        }
-        return regStatus ? "index" : "register";
+        return "index";
     }
+    @RequestMapping("/jump")
+    public String jump() {
+        return "register";
+    }
+
 }
