@@ -2,9 +2,12 @@ package com.swe266.bank.service.BankImpl;
 
 
 import com.swe266.bank.service.BankI.DepositServiceI;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.Map;
 
@@ -13,20 +16,21 @@ public class DepositServiceImpl implements DepositServiceI {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+    private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
-    public boolean deposit(Integer id, String money) {
+    public boolean deposit(String username, String money) {
 
-        Map<String, Object> resultMap = jdbcTemplate.queryForMap("select * from user");
-        System.out.println(resultMap.get("deposit"));
-        id = (Integer) resultMap.get("id");
+        String sql = "select deposit from user where username ='"+username+"'";
+        logger.info(sql);
+        Map<String, Object> resultMap = jdbcTemplate.queryForMap(sql);
         Integer balance = (Integer) resultMap.get("deposit");
         Integer new_deposit = Integer.valueOf(money);
-        if(new_deposit<0){
-            System.out.println("Please enter the valid money");
+        if(new_deposit<0)
             return false;
-        }
 
-        jdbcTemplate.update("update user set deposit=? where id=?", balance+new_deposit, id);
+        sql = "update user set deposit="+money+" where username='"+username+"'";
+        logger.info(sql);
+        jdbcTemplate.update(sql);
         return true;
     }
 }
