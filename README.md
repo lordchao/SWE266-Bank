@@ -38,9 +38,16 @@ create table user(
 1. Unzip the package into any directory you like.
 2. Use intelliJ to open the Maven project and make sure you use Java 11 or above.
 3. Go to the file: ```src/main/resources/application.properties```
+![image](https://user-images.githubusercontent.com/51472016/167575098-124e69be-efab-4e0f-9c58-bd2fc492caf1.png)
+
 4. configure your datasource.url to your local database url.
 5. configure your username and password.
 6. Make sure the port of 8080 is not occupied by other processes. If it is occupied by other process, please kill them first.
-8. Go to the file ```src/main/java/com/swe266/bank/BankApplication.java```
-9. Run the main function.
-10. Turn on your browser and go to ```localhost:8080```
+<img width="570" alt="image" src="https://user-images.githubusercontent.com/51472016/167575612-51560bc9-ab97-497f-a263-1f6304e6c597.png">
+
+7. Go to the file ```src/main/java/com/swe266/bank/BankApplication.java```
+8. Run the main function.
+![image](https://user-images.githubusercontent.com/51472016/167575703-2d35eceb-5463-4582-bd42-6554628f24d5.png)
+
+9. Turn on your browser and go to ```localhost:8080```
+![image](https://user-images.githubusercontent.com/51472016/167575741-b4c60c29-e7aa-4f02-bd99-ab96dc21be07.png)
