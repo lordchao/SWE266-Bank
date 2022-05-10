@@ -25,19 +25,24 @@ public class RegServiceImpl implements RegServiceI {
             return false;
         }
 
-        String cmd = "select * from user";
-        logger.info(cmd);
-        List<Map<String, Object>> results = jdbcTemplate.queryForList(cmd);
-        //logger.info(username + " " + password);
-
-        for (Map<String, Object> oneMap : results) {
-            //logger.info(oneMap.get("username") + " " + oneMap.get("password"));
-            if (oneMap.get("username").equals(username)) {
-                logger.info("This username has been registered before, please try another one!");
-
-                return false;
-            }
-
+//        String cmd = "select * from user";
+//        logger.info(cmd);
+//        List<Map<String, Object>> results = jdbcTemplate.queryForList(cmd);
+//        //logger.info(username + " " + password);
+//
+//        for (Map<String, Object> oneMap : results) {
+//            //logger.info(oneMap.get("username") + " " + oneMap.get("password"));
+//            if (oneMap.get("username").equals(username)) {
+//                logger.info("This username has been registered before, please try another one!");
+//
+//                return false;
+//            }
+//
+//        }
+        List<Map<String, Object>> resultMap = jdbcTemplate.queryForList("select password from user where username= '"+username+"'");
+        if (resultMap.size() != 0) {
+            logger.info("This username has been registered before, please try another one!");
+            return false;
         }
 
 
