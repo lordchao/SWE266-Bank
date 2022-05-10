@@ -3,10 +3,6 @@ package com.swe266.bank.controller;
 import com.swe266.bank.service.BankI.LoginServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/main
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
