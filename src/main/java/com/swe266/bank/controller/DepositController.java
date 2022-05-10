@@ -27,6 +27,5 @@ public class DepositController {
             model.addAttribute("msg", "please input valid amount");
             return "error";
         }
-
     }
 }
