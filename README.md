@@ -19,7 +19,10 @@ Database:
 # Build/Test Instruction
 ## Set up database
 1. Start your MySql server
+<img width="668" alt="image" src="https://user-images.githubusercontent.com/51472016/167574737-4247cf53-f4aa-42ee-8c3c-7bbb2eb50c7b.png">
 2. Create your local MySQL database use any name you want.
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/51472016/167574804-c1e9452b-32a0-42e1-9273-1287db007b85.png">
+
 3. Use MySQLWorkbench to create your tables for your database. Use the following SQL command: 
 ~~~~sql 
 drop table if exists user;
