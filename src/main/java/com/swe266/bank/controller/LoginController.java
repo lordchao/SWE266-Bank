@@ -17,7 +17,8 @@ public class LoginController {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(String username, String password, Model model) {
         boolean loginStatus = loginServiceI.login(username, password);
-        if (loginStatus) return "main";
+        if (loginStatus)
+            return "main";
         else {
             model.addAttribute("msg", "login failed");
             return "error";

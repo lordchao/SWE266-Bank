@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Bank of group 13</title>
-    <h1/>Welcome
-
     <div id="header" style="width:900px">
         <h1>Login successfully</h1>
     </div>
@@ -16,25 +14,24 @@
             amount: <input id="transfer_amount" type="text" name="transfer_amount" required autofocus/><br>
             <button>confirm</button>
         </form>
-        <script type="text/javascript">
-            function popup(){
-                alert("点击[确定]以继续操作");
-            }
-        </script>
     </div>
+
     <div id="deposit" style="width:300px">
         Deposit
         <form th:action="@{/deposit}" method="post">
+            My username: <input id="username1" type="text" name="username" required autofocus/> <br>
             amount: <input id="deposit_amount" type="text" name="deposit_amount" required autofocus/><br>
             <button>confirm</button>
         </form>
     </div>
+
     <div id="withdraw" style="width:300px">
         Withdraw
-        <form>
+        <form th:action="@{/withdraw}" method="post">
+            username: <input id="withdraw username" type="text" name="username" required autofocus/><br>
             amount: <input id="withdraw amount" type="text" name="amount" required autofocus/><br>
+            <button>confirm</button>
         </form>
-        <button>confirm</button>
     </div>
 </head>
 <body>
