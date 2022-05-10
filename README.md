@@ -51,3 +51,8 @@ create table user(
 
 9. Turn on your browser and go to ```localhost:8080```
 ![image](https://user-images.githubusercontent.com/51472016/167575741-b4c60c29-e7aa-4f02-bd99-ab96dc21be07.png)
+10. Register first, if you do not have account.
+11. After registration, login with your username and passwords.
+12. ![image](https://user-images.githubusercontent.com/51472016/167716657-7d428ed8-cc47-4250-b6f1-a614a78e729e.png)
+13. Transfer, Deposit, Withdraw and Check balance functions are now available. You are all set!
+
