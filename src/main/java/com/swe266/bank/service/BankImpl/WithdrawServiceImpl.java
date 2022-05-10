@@ -28,8 +28,8 @@ public class WithdrawServiceImpl implements WithdrawServiceI {
         else {
             currentDeposit = currentDeposit - transferAmount;
             sql = "update user set deposit=" + currentDeposit;
-            jdbcTemplate.update(sql);
             logger.info(sql);
+            jdbcTemplate.update(sql);
             return true;
         }
     }
