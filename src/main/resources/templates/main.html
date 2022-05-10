@@ -9,8 +9,8 @@
     <div id="transfer" style="width:300px">
         Transfer
         <form th:action="@{/transfer}" method="post">
-            username: <input id="username" type="text" name="username" required autofocus/> <br>
-            myusername: <input id="thisUsername" type="text" name="thisUsername" required autofocus/> <br>
+            The one you want to transfer: <input id="username" type="text" name="username" required autofocus/> <br>
+            My username: <input id="thisUsername" type="text" name="thisUsername" required autofocus/> <br>
             amount: <input id="transfer_amount" type="text" name="transfer_amount" required autofocus/><br>
             <button>confirm</button>
         </form>
@@ -28,7 +28,7 @@
     <div id="withdraw" style="width:300px">
         Withdraw
         <form th:action="@{/withdraw}" method="post">
-            username: <input id="withdraw username" type="text" name="username" required autofocus/><br>
+            My username: <input id="withdraw username" type="text" name="username" required autofocus/><br>
             amount: <input id="withdraw amount" type="text" name="amount" required autofocus/><br>
             <button>confirm</button>
         </form>
