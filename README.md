@@ -8,7 +8,7 @@ Group Member: Xin Tan, Shuaihua Niu, Jiahan Tu, Chao Liu.
 
 # Project Architecture
 Front end:
-1. HTML
+1. HTML and Thymeleaf view resolver
 
 Back End:
 1. Spring Boot
@@ -46,7 +46,7 @@ create table user(
 <img width="570" alt="image" src="https://user-images.githubusercontent.com/51472016/167575612-51560bc9-ab97-497f-a263-1f6304e6c597.png">
 
 7. Go to the file ```src/main/java/com/swe266/bank/BankApplication.java```
-8. Run the main function.
+8. Run the main function, make sure the application start with spring boot configuration.
 ![image](https://user-images.githubusercontent.com/51472016/167575703-2d35eceb-5463-4582-bd42-6554628f24d5.png)
 
 9. Turn on your browser and go to ```localhost:8080```
