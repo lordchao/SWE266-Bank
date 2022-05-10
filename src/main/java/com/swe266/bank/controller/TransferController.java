@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -16,9 +17,16 @@ public class TransferController {
     private TransferServiceI transferServiceI;
 
     @RequestMapping("/transfer")
-    public String transfer(String username, String transfer_amount, String thisUsername) {
+    public String transfer(String username, String transfer_amount, String thisUsername, Model model) {
         boolean transferStatus = transferServiceI.transfer(username, transfer_amount, thisUsername);
-        if (transferStatus) return "main";
-        else return "error";
+        if (transferStatus) {
+            model.addAttribute("message", "transfer "
+                    +transfer_amount+" dollars to user "+ username + " successfully");
+            return "success";
+        }
+        else {
+            model.addAttribute("msg", "please check input amount or username");
+            return "error";
+        }
     }
 }

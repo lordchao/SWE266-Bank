@@ -26,13 +26,18 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/home")
-    public String home() {
+    @GetMapping("/")
+    public String home(){
+        return "index";
+    }
+
+    @GetMapping("/main")
+    public String main() {
         return "main";
     }
 
     @GetMapping(value="/success")
     public String success() {
-        return "forward:home";
+        return "forward:main";
     }
 }

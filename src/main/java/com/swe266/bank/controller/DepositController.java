@@ -28,4 +28,11 @@ public class DepositController {
             return "error";
         }
     }
+
+    @RequestMapping(value="check_balance")
+    public String checkBalance(String username, Model model) {
+        String balance = depositServiceI.checkBalance(username);
+        model.addAttribute("message", "current balance is: "+balance);
+        return "success";
+    }
 }
