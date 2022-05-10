@@ -17,6 +17,7 @@ public class DepositController {
     private DepositServiceI depositServiceI;
 
     @RequestMapping(value = "/deposit")
+
     public String deposit(String username, String deposit_amount, Model model) {
         boolean depositStatus = depositServiceI.deposit(username, deposit_amount);
         if (depositStatus) {
