@@ -21,7 +21,7 @@
     </div>
     <div id="deposit" style="width:300px">
         Deposit
-        <form>
+        <form th:action="@{/deposit}" method="post">
             amount: <input id="transfer amount" type="text" name="amount" required autofocus/><br>
         </form>
         <button>confirm</button>

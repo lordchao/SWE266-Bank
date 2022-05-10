@@ -22,10 +22,14 @@ public class DepositServiceImpl implements DepositServiceI {
         Map<String, Object> resultMap = jdbcTemplate.queryForMap("select * from user");
         System.out.println(resultMap.get("deposit"));
         id = (Integer) resultMap.get("id");
+        Integer balance = (Integer) resultMap.get("deposit");
+        Integer new_deposit = 100;
+        System.out.println(balance + new_deposit);
+
 
 //        Integer deposit = Integer.valueOf(String.valueOf(jdbcTemplate.queryForMap("select deposit from user where id=?", id)));
 //        Integer money_d = Integer.valueOf((String) resultMap.get("deposit"));
-//        jdbcTemplate.update("update user set balance=? where id=?", money_d, id);
+        jdbcTemplate.update("update user set balance=? where id=?", balance+new_deposit, id);
         return true;
     }
 }
