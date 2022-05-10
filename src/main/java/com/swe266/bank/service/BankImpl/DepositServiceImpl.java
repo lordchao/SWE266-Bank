@@ -32,8 +32,9 @@ public class DepositServiceImpl implements DepositServiceI {
             System.out.println("Please enter the valid money");
             return false;
         }
+        Double deposit = balance+new_deposit;
 
-        sql = "update user set deposit="+money+" where username='"+username+"'";
+        sql = "update user set deposit="+deposit+" where username='"+username+"'";
         logger.info(sql);
         jdbcTemplate.update(sql);
         return true;
