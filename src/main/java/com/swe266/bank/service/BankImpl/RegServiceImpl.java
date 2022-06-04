@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -15,6 +16,9 @@ import java.util.logging.Logger;
 public class RegServiceImpl implements RegServiceI {
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    HttpSession session;
 
     private static final Logger logger = Logger.getLogger("SWE266-Bank: ");
 
@@ -34,7 +38,6 @@ public class RegServiceImpl implements RegServiceI {
             logger.info("No input");
             return false;
         }
-
         if (!valid(username) || username.length() < 1 || username.length() > 128) {
             logger.info("Invalid input of username");
             return false;
@@ -51,36 +54,22 @@ public class RegServiceImpl implements RegServiceI {
                 return false;
             }
         }
+        String cmd = "select * from user";
+        logger.info(cmd);
+        List<Map<String, Object>> results = jdbcTemplate.queryForList(cmd);
+        for (Map<String, Object> oneMap : results) {
+            if (oneMap.get("username").equals(username)) {
+                logger.info("This username has been registered before, please try another one!");
 
-
-
-
-//        String cmd = "select * from user";
-//        logger.info(cmd);
-//        List<Map<String, Object>> results = jdbcTemplate.queryForList(cmd);
-//        //logger.info(username + " " + password);
-//
-//        for (Map<String, Object> oneMap : results) {
-//            //logger.info(oneMap.get("username") + " " + oneMap.get("password"));
-//            if (oneMap.get("username").equals(username)) {
-//                logger.info("This username has been registered before, please try another one!");
-//
-//                return false;
-//            }
-//
-//        }
-        List<Map<String, Object>> resultMap = jdbcTemplate.queryForList("select password from user where username= '"+username+"'");
-        if (resultMap.size() != 0) {
-            logger.info("This username has been registered before, please try another one!");
-            return false;
+                return false;
+            }
         }
-
 
         //insert new user info
         String insertCMD = "insert into user (username, password, deposit) values('" + username + "','" + password + "','" + balance + "')";
         jdbcTemplate.execute(insertCMD);
         logger.info("Register successfully!");
-
+        session.setAttribute("username", username);
         return true;
     }
 

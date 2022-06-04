@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -18,10 +19,30 @@ public class LoginServiceImpl implements LoginServiceI {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
-    private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
+    @Autowired
+    HttpSession session;
+    private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
+    public boolean valid(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            String c = String.valueOf(str.charAt(i));
+            if (!c.matches("[_\\-\\.0-9a-z]")) {
+                return false;
+            }
+        }
+        return true;
+    }
     public boolean login(String username, String password) {
         //TODO create a mapping for checking user
+        if (username == null || username.length() == 0 || password == null || password.length() == 0) {
+            logger.info("No input");
+            return false;
+        }
+        if (!valid(username) || username.length() < 1 || username.length() > 128) {
+            logger.info("Invalid input of username");
+            return false;
+        }
+
         logger.info("select username from user where username='"+username+"'");
         List<Map<String, Object>> userResultMap = jdbcTemplate.queryForList("select username from user ");
         Set<String> userNames = new HashSet<>();
@@ -33,6 +54,9 @@ public class LoginServiceImpl implements LoginServiceI {
         Map<String, Object> resultMap = jdbcTemplate.queryForMap("select password from user where username= '"+username+"'");
 
         logger.info("select password from user where username='"+username+"'" + " executed successfully");
+        if (resultMap.get("password").equals(password)) {
+            session.setAttribute("username", username);
+        }
         return resultMap.get("password").equals(password);
     }
 }

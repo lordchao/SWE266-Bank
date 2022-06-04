@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -18,8 +19,12 @@ public class WithdrawServiceImpl implements WithdrawServiceI {
     private final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
     private static final Pattern p = Pattern.compile("^(([1-9]{1}\\d*)|(0{1}))(\\.\\d{1,2})?$");
 
+    @Autowired
+    HttpSession session;
+
     @Override
-    public boolean Withdraw(String username, String amount) {
+    public boolean Withdraw(String amount) {
+        String username = (String) session.getAttribute("username");
         String sql = "select deposit from user where username='"+username+"'";
         logger.info(sql);
         double transferAmount = Double.parseDouble(amount);

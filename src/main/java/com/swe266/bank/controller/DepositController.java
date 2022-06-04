@@ -13,12 +13,13 @@ import java.util.Map;
 @Controller
 public class DepositController {
     @Autowired
-
     private DepositServiceI depositServiceI;
 
+
+
     @RequestMapping(value = "/deposit")
-    public String deposit(String username, String deposit_amount, Model model) {
-        boolean depositStatus = depositServiceI.deposit(username, deposit_amount);
+    public String deposit(String deposit_amount, Model model) {
+        boolean depositStatus = depositServiceI.deposit(deposit_amount);
         if (depositStatus) {
             model.addAttribute("message", "deposit "+deposit_amount+" successfully");
             return "success";
@@ -30,8 +31,8 @@ public class DepositController {
     }
 
     @RequestMapping(value="check_balance")
-    public String checkBalance(String username, Model model) {
-        String balance = depositServiceI.checkBalance(username);
+    public String checkBalance(Model model) {
+        String balance = depositServiceI.checkBalance();
         model.addAttribute("message", "current balance is: "+balance);
         return "success";
     }

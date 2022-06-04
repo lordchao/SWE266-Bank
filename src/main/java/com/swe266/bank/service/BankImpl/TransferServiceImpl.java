@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -23,15 +24,21 @@ import java.util.regex.Pattern;
 public class TransferServiceImpl implements TransferServiceI {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    HttpSession session;
     private Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
 
     private static final Pattern p = Pattern.compile("^(([1-9]{1}\\d*)|(0{1}))(\\.\\d{1,2})?$");
 
     @Override
-    public boolean transfer(String username, String transfer_amount, String thisUsername) {
+    public boolean transfer(String username, String transfer_amount) {
+        String thisUsername = (String) session.getAttribute("username");
         if (username.equals(thisUsername)) {
             return false;
         }
+        logger.info("Get username from session--------------" + (String) session.getAttribute("username"));
+
         logger.info(username,thisUsername,transfer_amount);
         logger.info("select deposit from user where username='"+username+"'");
 
