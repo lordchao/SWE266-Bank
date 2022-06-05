@@ -4,12 +4,15 @@ import com.swe266.bank.service.BankI.RegServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
+
+import static javax.xml.crypto.dsig.Transform.BASE64;
 
 
 @Service("RegService")
@@ -66,7 +69,11 @@ public class RegServiceImpl implements RegServiceI {
         }
 
         //insert new user info
-        String insertCMD = "insert into user (username, password, deposit) values('" + username + "','" + password + "','" + balance + "')";
+        //add hash function
+        Integer hash = 0;
+        for (int i=0; i<password.length(); ++i)
+            hash = 33*hash + password.charAt(i);
+        String insertCMD = "insert into user (username, password, deposit) values('" + username + "','" + hash + "','" + balance + "')";
         jdbcTemplate.execute(insertCMD);
         logger.info("Register successfully!");
         session.setAttribute("username", username);

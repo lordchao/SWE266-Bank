@@ -51,12 +51,17 @@ public class LoginServiceImpl implements LoginServiceI {
 
         if (!userNames.contains(username)) return false;
 
-        Map<String, Object> resultMap = jdbcTemplate.queryForMap("select password from user where username= '"+username+"'");
+        // add hash function
+        Integer hash = 0;
+        for (int i=0; i<password.length(); ++i)
+            hash = 33*hash + password.charAt(i);
 
+        Map<String, Object> resultMap = jdbcTemplate.queryForMap("select password from user where username= '"+username+"'");
+        String hash_s = String.valueOf(hash);
         logger.info("select password from user where username='"+username+"'" + " executed successfully");
-        if (resultMap.get("password").equals(password)) {
+        if (resultMap.get("password").equals(hash_s)) {
             session.setAttribute("username", username);
         }
-        return resultMap.get("password").equals(password);
+        return resultMap.get("password").equals(hash_s);
     }
 }
