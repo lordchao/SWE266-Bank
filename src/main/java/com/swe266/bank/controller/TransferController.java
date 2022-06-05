@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 public class TransferController {
@@ -16,9 +18,11 @@ public class TransferController {
     @Autowired
     private TransferServiceI transferServiceI;
 
+
     @RequestMapping("/transfer")
-    public String transfer(String username, String transfer_amount, String thisUsername, Model model) {
-        boolean transferStatus = transferServiceI.transfer(username, transfer_amount, thisUsername);
+    public String transfer(String username, String transfer_amount, Model model) {
+
+        boolean transferStatus = transferServiceI.transfer(username, transfer_amount);
         if (transferStatus) {
             model.addAttribute("message", "transfer "
                     +transfer_amount+" dollars to user "+ username + " successfully");
