@@ -62,9 +62,13 @@ public class TransferServiceImpl implements TransferServiceI {
 
         if (myBalance<0)
             return false;
+
+        String transactionSql = "insert into transaction(username, transaction_type, amount, time)\n" +
+                "\tvalues('" + username + "', 'transfer',"+ transfer_amount +", from_unixtime(unix_timestamp()))";
         jdbcTemplate.update("update user set deposit=? where username=?", toBalance, username);
         jdbcTemplate.update("update user set deposit=? where username=?", myBalance, thisUsername);
-        logger.info("Transfer success!");
+        jdbcTemplate.execute(transactionSql);
+        logger.info(username+" transfer " + transfer_amount+" successfully");
         return true;
     }
 }

@@ -75,7 +75,7 @@ public class RegServiceImpl implements RegServiceI {
             hash = 33*hash + password.charAt(i);
         String insertCMD = "insert into user (username, password, deposit) values('" + username + "','" + hash + "','" + balance + "')";
         jdbcTemplate.execute(insertCMD);
-        logger.info("Register successfully!");
+        logger.info(username + " register successfully!");
         session.setAttribute("username", username);
         return true;
     }

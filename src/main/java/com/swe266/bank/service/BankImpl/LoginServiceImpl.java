@@ -61,7 +61,7 @@ public class LoginServiceImpl implements LoginServiceI {
         logger.info("select password from user where username='"+username+"'" + " executed successfully");
         if (resultMap.get("password").equals(hash_s)) {
             session.setAttribute("username", username);
-            logger.info("User logged in.");
+            logger.info("User " + username + " logged in.");
         }
         return resultMap.get("password").equals(hash_s);
     }

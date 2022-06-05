@@ -36,9 +36,12 @@ public class WithdrawServiceImpl implements WithdrawServiceI {
         else {
             currentDeposit = currentDeposit - transferAmount;
             sql = "update user set deposit=" + currentDeposit;
-            logger.info(sql);
+            String transactionSql = "insert into transaction(username, transaction_type, amount, time)\n" +
+                    "\tvalues('" + username + "', 'withdraw',"+ amount +", from_unixtime(unix_timestamp()))";
             jdbcTemplate.update(sql);
-            logger.info("Withdraw success!");
+            logger.info(sql);
+            jdbcTemplate.execute(transactionSql);
+            logger.info("user "+username+" withdraw "+amount+" successfully");
             return true;
         }
     }

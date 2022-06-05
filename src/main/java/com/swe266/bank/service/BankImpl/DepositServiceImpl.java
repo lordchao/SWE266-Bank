@@ -42,9 +42,11 @@ public class DepositServiceImpl implements DepositServiceI {
         Double deposit = balance+new_deposit;
 
         sql = "update user set deposit="+deposit+" where username='"+username+"'";
-        logger.info(sql);
+        String transactionSql = "insert into transaction(username, transaction_type, amount, time)\n" +
+                "\tvalues('" + username + "', 'deposit',"+ money +", from_unixtime(unix_timestamp()))";
+        logger.info(username + " deposit " + money + " successfully current balance: " + balance);
         jdbcTemplate.update(sql);
-        logger.info("Deposit success!");
+        jdbcTemplate.execute(transactionSql);
         return true;
     }
 
