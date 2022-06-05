@@ -29,12 +29,16 @@ public class WithdrawServiceImpl implements WithdrawServiceI {
         logger.info(sql);
         double transferAmount = Double.parseDouble(amount);
         double currentDeposit = (double) jdbcTemplate.queryForMap(sql).get("deposit");
-        if (transferAmount > currentDeposit || !p.matcher(amount).matches()) return false;
+        if (transferAmount > currentDeposit || !p.matcher(amount).matches()) {
+            logger.info("Invalid withdraw!");
+            return false;
+        }
         else {
             currentDeposit = currentDeposit - transferAmount;
             sql = "update user set deposit=" + currentDeposit;
             logger.info(sql);
             jdbcTemplate.update(sql);
+            logger.info("Withdraw success!");
             return true;
         }
     }

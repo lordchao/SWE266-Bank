@@ -64,6 +64,7 @@ public class TransferServiceImpl implements TransferServiceI {
             return false;
         jdbcTemplate.update("update user set deposit=? where username=?", toBalance, username);
         jdbcTemplate.update("update user set deposit=? where username=?", myBalance, thisUsername);
+        logger.info("Transfer success!");
         return true;
     }
 }

@@ -30,6 +30,7 @@ public class RegServiceImpl implements RegServiceI {
         for (int i = 0; i < str.length(); i++) {
             String c = String.valueOf(str.charAt(i));
             if (!c.matches("[_\\-\\.0-9a-z]")) {
+                logger.info("Register failed, form invalid!");
                 return false;
             }
         }
@@ -63,7 +64,6 @@ public class RegServiceImpl implements RegServiceI {
         for (Map<String, Object> oneMap : results) {
             if (oneMap.get("username").equals(username)) {
                 logger.info("This username has been registered before, please try another one!");
-
                 return false;
             }
         }

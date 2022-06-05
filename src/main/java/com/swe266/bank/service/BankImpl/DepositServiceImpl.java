@@ -36,6 +36,7 @@ public class DepositServiceImpl implements DepositServiceI {
         Double new_deposit = Double.valueOf(money);
         if(new_deposit<0 || !PATTERN.matcher(money).matches()){
             System.out.println("Please enter the valid money");
+            logger.info("Invalid deposit!");
             return false;
         }
         Double deposit = balance+new_deposit;
@@ -43,12 +44,14 @@ public class DepositServiceImpl implements DepositServiceI {
         sql = "update user set deposit="+deposit+" where username='"+username+"'";
         logger.info(sql);
         jdbcTemplate.update(sql);
+        logger.info("Deposit success!");
         return true;
     }
 
     public String checkBalance() {
         String username = (String) session.getAttribute("username");
         Map<String, Object> resMap = jdbcTemplate.queryForMap("select deposit from user where username='"+username+"'");
+        logger.info("User checks the balance.");
         return resMap.get("deposit").toString();
     }
 }
