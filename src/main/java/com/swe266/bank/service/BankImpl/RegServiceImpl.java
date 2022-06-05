@@ -30,6 +30,7 @@ public class RegServiceImpl implements RegServiceI {
         for (int i = 0; i < str.length(); i++) {
             String c = String.valueOf(str.charAt(i));
             if (!c.matches("[_\\-\\.0-9a-z]")) {
+                logger.info("Register failed, form invalid!");
                 return false;
             }
         }
@@ -63,7 +64,6 @@ public class RegServiceImpl implements RegServiceI {
         for (Map<String, Object> oneMap : results) {
             if (oneMap.get("username").equals(username)) {
                 logger.info("This username has been registered before, please try another one!");
-
                 return false;
             }
         }
@@ -75,7 +75,7 @@ public class RegServiceImpl implements RegServiceI {
             hash = 33*hash + password.charAt(i);
         String insertCMD = "insert into user (username, password, deposit) values('" + username + "','" + hash + "','" + balance + "')";
         jdbcTemplate.execute(insertCMD);
-        logger.info("Register successfully!");
+        logger.info(username + " register successfully!");
         session.setAttribute("username", username);
         return true;
     }
